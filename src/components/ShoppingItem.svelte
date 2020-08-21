@@ -29,7 +29,6 @@
         <input
           type="text"
           bind:value={editedText}
-          autofocus
           on:keydown={handleKeydown} />
       </form>
     </td>

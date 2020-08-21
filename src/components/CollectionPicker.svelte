@@ -18,7 +18,7 @@
 </script>
 
 <button on:click={modal.open} class="bg-white rounded w-32 border-transparent">
-  {$selectedCollection?.name || ''}
+  {$selectedCollection && $selectedCollection.name || ''}
 </button>
 <Modal bind:this={modal}>
   <p class="text-3xl p-2">Vælg et hus</p>

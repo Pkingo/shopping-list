@@ -9,14 +9,14 @@
   import ShoppingItem from '../components/ShoppingItem.svelte';
   import { addItem, getItems } from '../utils/db/shopping';
   import { selectedCollection } from '../stores/collection';
-  let shoppingItems = getItems($selectedCollection?.id || '');
-  $: shoppingItems = getItems($selectedCollection?.id || '');
+  let shoppingItems = getItems($selectedCollection && $selectedCollection.name || '');
+  $: shoppingItems = getItems($selectedCollection && $selectedCollection.name || '');
 
   let text = "";
 
   function handleSubmit(event) {
     event.preventDefault();
-    addItem(text, $selectedCollection?.id || '');
+    addItem(text, $selectedCollection && $selectedCollection.name || '');
     text = "";
   }
 </script>
