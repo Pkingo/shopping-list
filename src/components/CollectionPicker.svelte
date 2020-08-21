@@ -2,16 +2,18 @@
   import { onMount } from 'svelte';
   import Modal from './Modal.svelte';
   import { selectedCollection } from '../stores/collection';
+  import { user } from '../stores/user';
   import type { ICollection } from '../types/Collection';
   import { collectionData } from "rxfire/firestore";
   import { db } from '../config/firebase';
+import type App from '../App.svelte';
 
   let modal;
   const query = db.collection("collection");
   const observableCollections = collectionData<ICollection>(query, "id");
 
   onMount(() => {
-    if (!$selectedCollection) {
+    if ($user && !$selectedCollection) {
       modal.open()
     }
   });
