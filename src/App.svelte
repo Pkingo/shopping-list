@@ -12,6 +12,7 @@
 	onMount(() => {
 		isLoading = true;
 		checkIsLoggedIn().then(user.login).catch(user.logout).finally(() => {
+			console.log("finally")
 			isLoading = false;
 		});
 	})

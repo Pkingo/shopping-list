@@ -1,15 +1,15 @@
 <script lang="ts">
   import Login from './Login.svelte';
+  import Settings from './Settings.svelte';
   import CollectionPicker from './CollectionPicker.svelte';
+  import { user } from '../stores/user';
   let isExpanded = false;
 	const toggleExpand = () => isExpanded = !isExpanded
 </script>
 
 <nav class="flex items-center justify-between flex-wrap bg-red-900 p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <a href="/">
-      <span class="font-semibold text-xl tracking-tight">Brætspilsministeriet</span>
-    </a>
+    <CollectionPicker />
   </div>
   <div class="block md:hidden">
     <button on:click={toggleExpand} class="flex items-center px-3 py-2 border rounded text-red-500 border-red-700 hover:text-white hover:border-white">
@@ -17,9 +17,11 @@
     </button>
   </div>
   <div class="pt-4 md:pt-0 w-full block flex-grow md:flex md:items-center md:w-auto md:justify-end {isExpanded ? '': 'hidden'}">
-    <div class="text-sm md:flex md:mx-2">
-      <CollectionPicker />
-    </div>
+    {#if $user}  
+      <div class="pb-2 md:pb-0 text-sm md:flex md:mx-2">
+        <Settings />
+      </div>
+    {/if}
     <div class="text-sm md:flex md:mx-2">
       <Login />
     </div>

@@ -9,14 +9,16 @@
   import ShoppingItem from '../components/ShoppingItem.svelte';
   import { addItem, getItems } from '../utils/db/shopping';
   import { selectedCollection } from '../stores/collection';
-  let shoppingItems = getItems($selectedCollection && $selectedCollection.name || '');
-  $: shoppingItems = getItems($selectedCollection && $selectedCollection.name || '');
+  import type { Observable } from 'rxjs';
+  
+  let shoppingItems: Observable<IShoppingItem[]>;
+  $: shoppingItems = getItems($selectedCollection.name || '');
 
   let text = "";
 
   function handleSubmit(event) {
     event.preventDefault();
-    addItem(text, $selectedCollection && $selectedCollection.name || '');
+    addItem(text, $selectedCollection.name || '');
     text = "";
   }
 </script>
@@ -33,7 +35,7 @@
   </table>
   <form class="flex justify-start md:mx-20 border-red-900 border-t-2 pt-4 mt-4" on:submit={handleSubmit}>
     <input class="mr-4 px-2 rounded" placeholder="Tilføj indkøb" bind:value={text} />
-    <button class="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-1 px-4 border border-green-500 hover:border-transparent rounded" type="submit">Tilføj</button>
+    <button class="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white px-4 border border-green-500 hover:border-transparent rounded" type="submit">Tilføj</button>
   </form>
 {/if}
 

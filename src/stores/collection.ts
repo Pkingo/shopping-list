@@ -1,18 +1,18 @@
 import { writable } from "svelte/store";
 import type { ICollection } from "../types/Collection";
-import { getCollection, storeCollection } from "../utils/store";
+import { getSelectedCollection, storeSelectedCollection } from "../utils/store";
 
-const initialCollection = getCollection();
+const initialCollection = getSelectedCollection();
 
 function createSelectedCollection() {
-  const { subscribe, set } = writable<ICollection | undefined>(
-    initialCollection || undefined
+  const { subscribe, set } = writable<ICollection>(
+    initialCollection || ({} as ICollection)
   );
 
   return {
     subscribe,
     select: (collection: ICollection) => {
-      storeCollection(collection);
+      storeSelectedCollection(collection);
       set(collection);
     },
   };

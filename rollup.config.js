@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import replace from "rollup-plugin-replace";
+import { config } from "dotenv";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -44,7 +45,8 @@ export default {
   },
   plugins: [
     replace({
-      FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
+      FIREBASE_API_KEY:
+        process.env.FIREBASE_API_KEY || config().parsed.FIREBASE_API_KEY,
     }),
     svelte({
       // enable run-time checks when not in production

@@ -6,7 +6,7 @@ function createUserStore() {
 
   return {
     subscribe,
-    login: (user: User) => set(user),
+    login: set,
     logout: () => set(null),
   };
 }

@@ -19,10 +19,10 @@
 <div class="absolute top-0 left-0 flex justify-center items-center z-10">
   <div class="bg-gray-400 opacity-50 w-screen h-screen" />
   <div class="absolute bg-white rounded p-2">
-    <div class="float-right cursor-pointer" on:click={close}>
+    <div class="float-right cursor-pointer text-black" on:click={close}>
       <Icon data={closeIcon} />
     </div>
-    <div class="p-4">
+    <div class="p-4 text-black">
       <slot></slot>
     </div>
   </div>
