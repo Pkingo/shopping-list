@@ -12,9 +12,9 @@
   import type { Observable } from 'rxjs';
   
   let shoppingItems: Observable<IShoppingItem[]>;
-  $: shoppingItems = getItems($selectedCollection.name || '');
-
   let text = "";
+
+  $: shoppingItems = getItems($selectedCollection.id || '');
 
   function handleSubmit(event) {
     event.preventDefault();
