@@ -27,6 +27,20 @@ export function updateStatus(newStatus: boolean, id: string) {
   return db.collection(DATABASE_NAME).doc(id).update({ isBought: newStatus });
 }
 
+export function deleteItemsByCollectionId(collectionId: string) {
+  return db
+    .collection(DATABASE_NAME)
+    .where("collectionId", "==", collectionId)
+    .get()
+    .then((items) => {
+      const batch = db.batch();
+      items.forEach((item) => {
+        batch.delete(item.ref);
+      });
+      return batch.commit();
+    });
+}
+
 export function getItems(collectionId: string): Observable<IShoppingItem[]> {
   const query = db
     .collection(DATABASE_NAME)

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { user } from '../stores/user';
   import { collectionData } from "rxfire/firestore";
   import { fade } from "svelte/transition";
@@ -18,7 +19,7 @@
 
   function handleSubmit(event) {
     event.preventDefault();
-    addItem(text, $selectedCollection.name || '');
+    addItem(text, $selectedCollection.id || '');
     text = "";
   }
 </script>

@@ -19,7 +19,7 @@
   <div class="pt-4 md:pt-0 w-full block flex-grow md:flex md:items-center md:w-auto md:justify-end {isExpanded ? '': 'hidden'}">
     {#if $user}  
       <div class="pb-2 md:pb-0 text-sm md:flex md:mx-2">
-        <Settings />
+        <Settings on:close={() => isExpanded = false} />
       </div>
     {/if}
     <div class="text-sm md:flex md:mx-2">

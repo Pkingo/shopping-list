@@ -6,7 +6,7 @@ const initialCollection = getSelectedCollection();
 
 function createSelectedCollection() {
   const { subscribe, set } = writable<ICollection>(
-    initialCollection || ({} as ICollection)
+    initialCollection || { id: "", name: "" }
   );
 
   return {
@@ -14,6 +14,17 @@ function createSelectedCollection() {
     select: (collection: ICollection) => {
       storeSelectedCollection(collection);
       set(collection);
+    },
+    validate: (collections: ICollection[]) => {
+      const { id } = getSelectedCollection();
+      if (id) {
+        set(
+          collections.find((collection) => collection.id === id) || {
+            id: "",
+            name: "",
+          }
+        );
+      }
     },
   };
 }

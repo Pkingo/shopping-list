@@ -7,5 +7,7 @@ export function storeSelectedCollection(collection: ICollection) {
 }
 
 export function getSelectedCollection(): ICollection {
-  return JSON.parse(localStorage.getItem(COLLECTION_KEY));
+  return (
+    JSON.parse(localStorage.getItem(COLLECTION_KEY)) || { id: "", name: "" }
+  );
 }
