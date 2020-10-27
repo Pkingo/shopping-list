@@ -32,6 +32,7 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "firebase": "^7.18.0",
     "rxfire": "^3.13.5",
     "rxjs": "^6.6.2",
