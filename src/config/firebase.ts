@@ -17,7 +17,7 @@ firebase.initializeApp(firebaseConfig);
 
 export const checkIsLoggedIn = (): Promise<firebase.User> =>
   new Promise((resolve, rejects) => {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         resolve(user);
       } else {

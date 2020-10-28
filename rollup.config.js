@@ -21,12 +21,12 @@ function serve() {
     writeBundle() {
       if (server) return;
       server = require("child_process").spawn(
-        "npm",
+        "yarn",
         ["run", "start", "--", "--dev"],
         {
           stdio: ["ignore", "inherit", "inherit"],
           shell: true,
-        }
+        },
       );
 
       process.on("SIGTERM", toExit);
@@ -53,8 +53,8 @@ export default {
       dev: !production,
       // we'll extract any component CSS out into
       // a separate file - better for performance
-      css: (css) => {
-        css.write("public/build/bundle.css");
+      css: css => {
+        css.write("public/build/bundle.css", true);
       },
       preprocess: sveltePreprocess(),
     }),
@@ -66,7 +66,7 @@ export default {
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
       browser: true,
-      dedupe: ["svelte"],
+      dedupe: ["svelte", "svelte/transition", "svelte/internal"],
     }),
     commonjs(),
     typescript({ sourceMap: !production }),

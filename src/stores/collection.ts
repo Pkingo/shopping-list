@@ -6,7 +6,7 @@ const initialCollection = getSelectedCollection();
 
 function createSelectedCollection() {
   const { subscribe, set } = writable<ICollection>(
-    initialCollection || { id: "", name: "" }
+    initialCollection || { id: "", name: "" },
   );
 
   return {
@@ -19,10 +19,10 @@ function createSelectedCollection() {
       const { id } = getSelectedCollection();
       if (id) {
         set(
-          collections.find((collection) => collection.id === id) || {
+          collections.find(collection => collection.id === id) || {
             id: "",
             name: "",
-          }
+          },
         );
       }
     },

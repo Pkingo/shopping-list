@@ -2,22 +2,23 @@
 const cheerio = require("cheerio");
 const fetch = require("node-fetch").default;
 
-const toArray = (data) => {
+const toArray = data => {
   const array = [];
   for (let i = 0; i < data.length; i++) {
-    array.push(data[i].children.map((textNode) => textNode.data)[0]);
+    if (data[i].attribs["itemprop"] !== "recipeIngredient") continue;
+    array.push(data[i].children.map(textNode => textNode.data)[0]);
   }
   return array;
 };
 
-const scapeValdemarsro = (url) => {
+const scapeValdemarsro = url => {
   return fetch(url)
-    .then((resp) => resp.text())
-    .then((body) => cheerio.load(body)("li", ".ingredientlist"))
+    .then(resp => resp.text())
+    .then(body => cheerio.load(body)("li", ".ingredientlist"))
     .then(toArray);
 };
 
-exports.handler = async (event) => {
+exports.handler = async event => {
   try {
     const url = JSON.parse(event.body).url || "";
     if (!url) {
@@ -29,6 +30,9 @@ exports.handler = async (event) => {
     const ingredients = (await scapeValdemarsro(url)) || [];
     return {
       statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ ingredients }),
     };
   } catch (error) {
