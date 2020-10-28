@@ -58,16 +58,18 @@
   {/if}
 {:else}
   <form on:submit={handleSelectionSubmit} class="flex flex-col items-start">
-    {#each ingredients as ingredient}
-      <label class="inline-flex items-center mt-1">
-        <input
-          bind:group={selectedIngredients}
-          value={ingredient}
-          type="checkbox"
-          class="form-checkbox h-3 w-3 text-orange-600" /><span
-          class="ml-2 text-gray-700">{ingredient}</span>
-      </label>
-    {/each}
+    <div class="w-full">
+      {#each ingredients as ingredient}
+        <label class="inline-flex items-center mt-1 w-full">
+          <input
+            bind:group={selectedIngredients}
+            value={ingredient}
+            type="checkbox"
+            class="form-checkbox h-3 w-auto text-orange-600" /><span
+            class="ml-2 text-gray-700 truncate">{ingredient}</span>
+        </label>
+      {/each}
+    </div>
     <div class="mt-4 flex w-full justify-end">
       <Button variant="negative" on:click={onCancel}>Annuller</Button>
       <Button classes="ml-2" on:click={onAdd}>Tilføj</Button>
