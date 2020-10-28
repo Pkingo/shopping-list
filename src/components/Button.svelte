@@ -20,9 +20,9 @@
   disabled={loading}
   on:click
   {type}
-  class={`bg-transparent hover:bg-${color}-500 text-${color}-700 font-semibold hover:text-white px-4 border border-${color}-500 hover:border-transparent rounded ${classes}`}>
+  class={`flex items-center justify-center bg-transparent hover:bg-${color}-500 text-${color}-700 font-semibold hover:text-white px-4 border border-${color}-500 hover:border-transparent rounded ${classes}`}>
   <slot />
   {#if loading}
-    <Icon data={spinner} pulse scale="1" />
+    <Icon data={spinner} class="ml-2" pulse scale="1" />
   {/if}
 </button>
