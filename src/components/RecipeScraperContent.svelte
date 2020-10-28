@@ -49,7 +49,7 @@
   <form class="flex justify-start" on:submit={handleScraperSubmit}>
     <input
       class="mr-4 px-2 rounded w-full"
-      placeholder="Tilføj indkøb"
+      placeholder="Tilføj link fra Valdemarsro"
       bind:value={url} />
     <Button loading={state === 'loading'} type="submit">Tilføj</Button>
   </form>
