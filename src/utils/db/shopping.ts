@@ -15,6 +15,20 @@ export function addItem(name: string, collectionId: string) {
   });
 }
 
+export function addBatch(items: string[], collectionId: string) {
+  var batch = db.batch();
+  items.forEach(name => {
+    const docRef = db.collection(DATABASE_NAME).doc();
+    batch.set(docRef, {
+      name,
+      isBought: false,
+      collectionId,
+      creationDate: Date.now(),
+    });
+  });
+  return batch.commit();
+}
+
 export function updateName(newName: string, id: string) {
   return db.collection(DATABASE_NAME).doc(id).update({ name: newName });
 }
@@ -32,9 +46,9 @@ export function deleteItemsByCollectionId(collectionId: string) {
     .collection(DATABASE_NAME)
     .where("collectionId", "==", collectionId)
     .get()
-    .then((items) => {
+    .then(items => {
       const batch = db.batch();
-      items.forEach((item) => {
+      items.forEach(item => {
         batch.delete(item.ref);
       });
       return batch.commit();
