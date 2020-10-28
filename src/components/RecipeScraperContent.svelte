@@ -6,43 +6,9 @@
 
   const { close } = getContext("simple-modal");
   let url = "";
-  let ingredients = [
-    "250 g ris, kogt og afkølede fx jasmin eller basmati ris",
-    "1 kyllingebryst, skåret i tern",
-    "3 spsk olivenolie",
-    "1 rødløg, finthakket",
-    "2 fed hvidløg, finthakket",
-    "1 spsk soja",
-    "1 spsk kokossukker",
-    "4 spsk fishsauce",
-    "2 forårsløg, finthakket",
-    "2 gulerod, skrællede og skåret i tynde strimler",
-    "1 tomat, skåret i tynde både",
-    "1 rød peberfrugt, skåret i strimler",
-    "1 lime",
-    "1 håndfuld cashewnødder",
-    "1 håndfuld frisk koriander",
-    "0,50 rød chili, finthakket",
-  ];
-  let selectedIngredients = [
-    "250 g ris, kogt og afkølede fx jasmin eller basmati ris",
-    "1 kyllingebryst, skåret i tern",
-    "3 spsk olivenolie",
-    "1 rødløg, finthakket",
-    "2 fed hvidløg, finthakket",
-    "1 spsk soja",
-    "1 spsk kokossukker",
-    "4 spsk fishsauce",
-    "2 forårsløg, finthakket",
-    "2 gulerod, skrællede og skåret i tynde strimler",
-    "1 tomat, skåret i tynde både",
-    "1 rød peberfrugt, skåret i strimler",
-    "1 lime",
-    "1 håndfuld cashewnødder",
-    "1 håndfuld frisk koriander",
-    "0,50 rød chili, finthakket",
-  ];
-  let state = "success";
+  let ingredients = [];
+  let selectedIngredients = [];
+  let state = "idle";
 
   const handleScraperSubmit = event => {
     event.preventDefault();
