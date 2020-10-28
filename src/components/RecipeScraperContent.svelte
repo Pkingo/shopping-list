@@ -6,9 +6,43 @@
 
   const { close } = getContext("simple-modal");
   let url = "";
-  let ingredients = [];
-  let selectedIngredients = [];
-  let state = "idle";
+  let ingredients = [
+    "250 g ris, kogt og afkølede fx jasmin eller basmati ris",
+    "1 kyllingebryst, skåret i tern",
+    "3 spsk olivenolie",
+    "1 rødløg, finthakket",
+    "2 fed hvidløg, finthakket",
+    "1 spsk soja",
+    "1 spsk kokossukker",
+    "4 spsk fishsauce",
+    "2 forårsløg, finthakket",
+    "2 gulerod, skrællede og skåret i tynde strimler",
+    "1 tomat, skåret i tynde både",
+    "1 rød peberfrugt, skåret i strimler",
+    "1 lime",
+    "1 håndfuld cashewnødder",
+    "1 håndfuld frisk koriander",
+    "0,50 rød chili, finthakket",
+  ];
+  let selectedIngredients = [
+    "250 g ris, kogt og afkølede fx jasmin eller basmati ris",
+    "1 kyllingebryst, skåret i tern",
+    "3 spsk olivenolie",
+    "1 rødløg, finthakket",
+    "2 fed hvidløg, finthakket",
+    "1 spsk soja",
+    "1 spsk kokossukker",
+    "4 spsk fishsauce",
+    "2 forårsløg, finthakket",
+    "2 gulerod, skrællede og skåret i tynde strimler",
+    "1 tomat, skåret i tynde både",
+    "1 rød peberfrugt, skåret i strimler",
+    "1 lime",
+    "1 håndfuld cashewnødder",
+    "1 håndfuld frisk koriander",
+    "0,50 rød chili, finthakket",
+  ];
+  let state = "success";
 
   const handleScraperSubmit = event => {
     event.preventDefault();
@@ -58,16 +92,18 @@
   {/if}
 {:else}
   <form on:submit={handleSelectionSubmit} class="flex flex-col items-start">
-    {#each ingredients as ingredient}
-      <label class="inline-flex items-center mt-1">
-        <input
-          bind:group={selectedIngredients}
-          value={ingredient}
-          type="checkbox"
-          class="form-checkbox h-3 w-3 text-orange-600" /><span
-          class="ml-2 text-gray-700">{ingredient}</span>
-      </label>
-    {/each}
+    <div class="w-full">
+      {#each ingredients as ingredient}
+        <label class="inline-flex items-center mt-1 w-full">
+          <input
+            bind:group={selectedIngredients}
+            value={ingredient}
+            type="checkbox"
+            class="form-checkbox h-3 w-auto text-orange-600" /><span
+            class="ml-2 text-gray-700 truncate">{ingredient}</span>
+        </label>
+      {/each}
+    </div>
     <div class="mt-4 flex w-full justify-end">
       <Button variant="negative" on:click={onCancel}>Annuller</Button>
       <Button classes="ml-2" on:click={onAdd}>Tilføj</Button>
