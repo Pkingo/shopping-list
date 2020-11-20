@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext } from "svelte";
+  import { getContext, onMount } from "svelte";
 
   import Login from "./Login.svelte";
   import Settings from "./Settings.svelte";
@@ -10,9 +10,7 @@
 
   const { open } = getContext("simple-modal");
   let isExpanded = false;
-  $: $user,
-    selectedCollection,
-    $user && !$selectedCollection.name && openCollectionPicker();
+  $: $user && !$selectedCollection.name && openCollectionPicker();
 
   const toggleExpand = () => (isExpanded = !isExpanded);
   const openCollectionPicker = () => open(CollectionPicker);
