@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { getContext, onMount } from "svelte";
+  import { getContext } from "svelte";
+  import { fly } from "svelte/transition";
 
   import Login from "./Login.svelte";
   import Settings from "./Settings.svelte";
@@ -7,8 +8,10 @@
 
   import { user } from "../stores/user";
   import { selectedCollection } from "../stores/collection";
+  import BurgerMenu from "./BurgerMenu.svelte";
 
   const { open } = getContext("simple-modal");
+  let width = 0;
   let isExpanded = false;
   $: $user && !$selectedCollection.name && openCollectionPicker();
 
@@ -17,36 +20,31 @@
   const openSettings = () => open(Settings);
 </script>
 
-<nav class="flex items-center justify-between flex-wrap bg-red-900 p-6">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
+<nav
+  bind:clientWidth={width}
+  class="flex items-center justify-between flex-wrap bg-red-900 p-6">
+  <div class="flex items-center flex-shrink-0 text-white mr-6 z-10">
     <button on:click={openCollectionPicker} class="border-transparent">
       <span class="font-semibold text-xl tracking-tight">
         {($user && $selectedCollection.name) || 'Brætspilsministeriet'}
       </span>
     </button>
   </div>
-  <div class="block md:hidden">
-    <button
-      on:click={toggleExpand}
-      class="flex items-center px-3 py-2 border rounded text-white-500 border-white-700 hover:text-white hover:border-white">
-      <svg
-        class="fill-current h-3 w-3 text-white"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
-        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
-    </button>
-  </div>
-  <div
-    class="pt-4 md:pt-0 w-full block flex-grow md:flex md:items-center md:w-auto md:justify-end {isExpanded ? '' : 'hidden'}">
-    {#if $user}
-      <div class="pb-2 md:pb-0 text-sm md:flex md:mx-2">
-        <p on:click={openSettings} class="text-white cursor-pointer">
+  <BurgerMenu open={isExpanded} on:toggle={toggleExpand} />
+  {#if isExpanded || width >= 768}
+    <div
+      transition:fly={{ x: -100, duration: 500 }}
+      class="item-list absolute h-screen bg-red-900 top-0 left-0 w-40 pt-20 md:relative md:h-auto md:flex md:justify-items-end md:pt-0 md:w-auto">
+      {#if $user}
+        <button
+          on:click={openSettings}
+          class="item-list pl-6 py-3 md:flex md:mx-2 text-white focus:outline-none">
           Indstillinger
-        </p>
+        </button>
+      {/if}
+      <div class=" md:flex md:mx-2 pl-6 py-3">
+        <Login />
       </div>
-    {/if}
-    <div class="text-sm md:flex md:mx-2">
-      <Login />
     </div>
-  </div>
+  {/if}
 </nav>

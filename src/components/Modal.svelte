@@ -20,7 +20,7 @@
 {#if isOpen}
   <div
     on:keydown={onKeyDown}
-    class="absolute top-0 left-0 flex justify-center items-center z-10">
+    class="absolute top-0 left-0 flex justify-center items-center z-10 mx-1 md:mx-auto">
     <div class="bg-gray-400 opacity-50 w-screen h-screen" />
     <div class="absolute w-screen md:w-2/3">
       <div class="bg-white rounded p-2 mx-4 md:mx-0">
