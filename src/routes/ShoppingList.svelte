@@ -11,6 +11,7 @@
   import { addItem, getItems } from "../utils/db/shopping";
   import { selectedCollection } from "../stores/collection";
   import type { IShoppingItem } from "../types/ShoppingItem";
+  import Jokes from "../components/Jokes.svelte";
 
   const { open } = getContext("simple-modal");
   let shoppingItems: Observable<IShoppingItem[]>;
@@ -52,3 +53,4 @@
     </Button>
   </form>
 {/if}
+<Jokes />

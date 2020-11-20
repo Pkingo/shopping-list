@@ -1,6 +1,5 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
-  import { createEventDispatcher } from "svelte";
   import Icon from "svelte-awesome";
   import { check, trash, times } from "svelte-awesome/icons";
   import { removeItem, updateName, updateStatus } from "../utils/db/shopping";
