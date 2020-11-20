@@ -23,6 +23,8 @@
 </script>
 
 <nav
+  use:clickOutside
+  on:clickOutside={collapse}
   bind:clientWidth={width}
   class="flex items-center justify-between flex-wrap bg-red-900 p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6 z-10">
@@ -35,8 +37,6 @@
   <BurgerMenu open={isExpanded} on:toggle={toggleExpand} />
   {#if isExpanded || width >= 768}
     <div
-      use:clickOutside
-      on:clickOutside={collapse}
       transition:fly={{ x: -100, duration: 500 }}
       class="item-list absolute h-screen bg-red-900 top-0 left-0 w-40 pt-20 md:relative md:h-auto md:flex md:justify-items-end md:pt-0 md:w-auto">
       {#if $user}
