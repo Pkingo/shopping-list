@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext, onMount } from "svelte";
+  import { getContext } from "svelte";
 
   import Accordion from "./Accordion.svelte";
 
@@ -13,6 +13,7 @@
   let isRenameOpen = false;
   let isDeleteOpen = false;
   const { close } = getContext("simple-modal");
+  $: name = $selectedCollection.name;
 
   const onClose = () => {
     close();
@@ -20,23 +21,19 @@
     isRenameOpen = false;
   };
 
-  onMount(() => {
-    console.log("Settings mounted");
-  });
-
   const onNewNameSubmit = e => {
     e.preventDefault();
+    onClose();
+    if (name === $selectedCollection.name) return;
     updateCollectionName(name, $selectedCollection.id);
     selectedCollection.select({
       name,
       id: $selectedCollection.id,
     });
-    onClose();
   };
   const onDeleteSubmit = e => {
     e.preventDefault();
     deleteCollection($selectedCollection.id);
-    onClose();
   };
   const onRenameToggle = () => {
     isDeleteOpen = false;
