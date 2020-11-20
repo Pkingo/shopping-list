@@ -5,10 +5,11 @@
   import Login from "./Login.svelte";
   import Settings from "./Settings.svelte";
   import CollectionPicker from "./CollectionPicker.svelte";
+  import BurgerMenu from "./BurgerMenu.svelte";
 
   import { user } from "../stores/user";
   import { selectedCollection } from "../stores/collection";
-  import BurgerMenu from "./BurgerMenu.svelte";
+  import { clickOutside } from "../utils/clickOutside";
 
   const { open } = getContext("simple-modal");
   let width = 0;
@@ -16,6 +17,7 @@
   $: $user && !$selectedCollection.name && openCollectionPicker();
 
   const toggleExpand = () => (isExpanded = !isExpanded);
+  const collapse = () => (isExpanded = false);
   const openCollectionPicker = () => open(CollectionPicker);
   const openSettings = () => open(Settings);
 </script>
@@ -33,6 +35,8 @@
   <BurgerMenu open={isExpanded} on:toggle={toggleExpand} />
   {#if isExpanded || width >= 768}
     <div
+      use:clickOutside
+      on:clickOutside={collapse}
       transition:fly={{ x: -100, duration: 500 }}
       class="item-list absolute h-screen bg-red-900 top-0 left-0 w-40 pt-20 md:relative md:h-auto md:flex md:justify-items-end md:pt-0 md:w-auto">
       {#if $user}
