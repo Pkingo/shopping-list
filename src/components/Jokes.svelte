@@ -16,7 +16,7 @@
   onMount(updateJoke);
 </script>
 
-<p>{joke}</p>
+<p class="mt-10 mb-4">{joke}</p>
 <span on:click={updateJoke}>
   <Icon spin={isLoading} scale={2} data={refresh} />
 </span>
